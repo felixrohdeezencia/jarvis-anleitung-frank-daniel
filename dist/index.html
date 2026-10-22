@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="img/zenbai-logo.png">
+<title>Jarvis-Anleitung Frank &amp; Daniel</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Die Jarvis-Speisekarte für Frank und Daniel: was Jarvis kann, welche Sätze funktionieren und wie die Leadmaschine läuft.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+<style>
+/* Layout: eine Spalte (max. 1080px), fünf Etappen unter einer klebenden Navigation, je Etappe höchstens ein iPad-Bildschirm */
+:root{
+  --bg:#f7f9fb; --surface:#fff; --surface-2:#eef3f6; --text:#000; --text-2:#5f6b76;
+  --brand:#12324a; --accent:#2a607c;
+  --violet:#4f46e5; --violet-hover:#4338ca; --violet-soft:#eef2ff; --on-violet:#fff;
+  --border:#d9e1e7;
+  --success:#047857; --success-dot:#059669; --success-soft:#ecfdf5;
+  --warn:#b45309; --warn-dot:#d97706; --warn-soft:#fffbeb;
+  --work:#4338ca; --work-soft:#eef2ff;
+  --ink:#0b1220; --ink-border:transparent; --ink-text:#e6edf5; --ink-line:#818cf8;
+  --ink-ph:#c7d2fe; --ink-ph-bg:rgba(129,140,248,.2);
+  --ink-btn:rgba(255,255,255,.08); --ink-btn-hover:rgba(255,255,255,.15); --ink-btn-border:rgba(255,255,255,.18);
+  --ink-ok:#a7f3d0; --ink-ok-bg:rgba(52,211,153,.18);
+  --shadow:0 1px 2px rgba(18,50,74,.05), 0 10px 28px -16px rgba(18,50,74,.22);
+  --spectrum:linear-gradient(90deg,#f97316 0%,#ec4899 24%,#8b5cf6 48%,#3b82f6 72%,#22c55e 100%);
+  --font:"Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --r:12px; --nav-h:56px; --max:1080px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b1220; --surface:#111a2c; --surface-2:#18233a; --text:#f1f5f9; --text-2:#9fb0c2;
+    --brand:#dbe8f3; --accent:#7fb8d6;
+    --violet:#a5b4fc; --violet-hover:#c7d2fe; --violet-soft:#1d2250; --on-violet:#0b1220;
+    --border:#26344d;
+    --success:#6ee7b7; --success-dot:#34d399; --success-soft:rgba(52,211,153,.13);
+    --warn:#fcd34d; --warn-dot:#fbbf24; --warn-soft:rgba(251,191,36,.13);
+    --work:#c7d2fe; --work-soft:rgba(165,180,252,.15);
+    --ink:#060a14; --ink-border:#26344d;
+    --shadow:none; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0b1220; --surface:#111a2c; --surface-2:#18233a; --text:#f1f5f9; --text-2:#9fb0c2;
+  --brand:#dbe8f3; --accent:#7fb8d6;
+  --violet:#a5b4fc; --violet-hover:#c7d2fe; --violet-soft:#1d2250; --on-violet:#0b1220;
+  --border:#26344d;
+  --success:#6ee7b7; --success-dot:#34d399; --success-soft:rgba(52,211,153,.13);
+  --warn:#fcd34d; --warn-dot:#fbbf24; --warn-soft:rgba(251,191,36,.13);
+  --work:#c7d2fe; --work-soft:rgba(165,180,252,.15);
+  --ink:#060a14; --ink-border:#26344d;
+  --shadow:none; color-scheme:dark;
+}
+
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+*,*::before,*::after{box-sizing:border-box}
+h1,h2,h3{margin:0;color:var(--brand);text-wrap:balance}
+p{margin:0}
+a{color:var(--violet)}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--violet);outline-offset:2px;border-radius:6px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.wrap{max-width:var(--max);margin-inline:auto;padding-left:max(clamp(16px,4vw,32px),env(safe-area-inset-left,0px));padding-right:max(clamp(16px,4vw,32px),env(safe-area-inset-right,0px))}
+
+/* Kopf */
+.spectrum{height:3px;background:var(--spectrum)}
+.brandbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.brandbar a{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--text-2);font-size:14px;font-weight:500}
+.logo{height:30px;width:auto;display:block}
+.logo-dark{display:none}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .logo-light{display:none}:root:not([data-theme="light"]) .logo-dark{display:block}}
+:root[data-theme="dark"] .logo-light{display:none}
+:root[data-theme="dark"] .logo-dark{display:block}
+.brandbar .divider{width:1px;height:22px;background:var(--border)}
+.for{font-size:14px;color:var(--text-2)}
+@media (max-width:520px){.for{display:none}}
+
+nav.main{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:saturate(1.4) blur(12px);backdrop-filter:saturate(1.4) blur(12px);border-block:1px solid var(--border)}
+nav.main ul{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(5,1fr);max-width:var(--max)}
+nav.main a{display:flex;align-items:center;justify-content:center;min-height:var(--nav-h);padding:0 4px;text-decoration:none;color:var(--text-2);font-size:15px;font-weight:500;box-shadow:inset 0 -2px 0 transparent;transition:color .15s,box-shadow .15s;text-align:center;line-height:1.2}
+nav.main a:hover{color:var(--text)}
+nav.main a[aria-current="true"]{color:var(--violet);box-shadow:inset 0 -2px 0 var(--violet);font-weight:600}
+.long{display:none}
+@media (min-width:720px){.long{display:inline}.short{display:none}}
+
+/* Abschnitte */
+section{scroll-margin-top:calc(var(--nav-h) + 8px)}
+section > .wrap{padding-block:48px;display:grid;gap:24px}
+section + section{border-top:1px solid var(--border)}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--violet)}
+h1{font-size:clamp(34px,6.4vw,54px);font-weight:600;letter-spacing:-1px;line-height:1.06}
+h2{font-size:clamp(27px,4.2vw,38px);font-weight:600;letter-spacing:-.7px;line-height:1.12}
+h3{font-size:19px;font-weight:600;letter-spacing:-.2px;line-height:1.3}
+.head{display:grid;gap:10px;max-width:62ch}
+.lead{font-size:19px;color:var(--text-2)}
+.muted{color:var(--text-2)}
+.small{font-size:14.5px}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px;box-shadow:var(--shadow);min-width:0}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 20px;border-radius:10px;border:1px solid transparent;font-weight:600;font-size:16px;text-decoration:none;cursor:pointer;transition:background .15s,border-color .15s,color .15s;-webkit-tap-highlight-color:transparent}
+.btn svg{width:18px;height:18px;flex:none}
+.btn-primary{background:var(--violet);color:var(--on-violet)}
+.btn-primary:hover{background:var(--violet-hover)}
+.btn-primary.ok{background:var(--success-dot);color:#fff}
+.btn-ghost{background:var(--surface);border-color:var(--border);color:var(--text)}
+.btn-ghost:hover{border-color:var(--violet);color:var(--violet)}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px}
+
+/* Prompt-Box */
+.prompt{background:var(--ink);color:var(--ink-text);border:1px solid var(--ink-border);border-left:3px solid var(--ink-line);border-radius:var(--r);padding:16px 14px 12px 18px;display:grid;gap:10px;min-width:0}
+.prompt p{font-size:16.5px;line-height:1.55;overflow-wrap:anywhere}
+.prompt .lines{display:grid;gap:8px}
+.prompt .lines b{color:#fff;font-weight:600}
+.ph{background:var(--ink-ph-bg);color:var(--ink-ph);border-radius:4px;padding:0 3px}
+.copy{justify-self:end;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:8px;background:var(--ink-btn);border:1px solid var(--ink-btn-border);color:#fff;font-weight:600;font-size:15px;cursor:pointer;transition:background .15s}
+.copy:hover{background:var(--ink-btn-hover)}
+.copy svg{width:17px;height:17px}
+.copy.ok{background:var(--ink-ok-bg);border-color:rgba(52,211,153,.5);color:var(--ink-ok)}
+.copy:focus-visible{outline-color:var(--ink-line)}
+
+/* Badges */
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;padding:3px 10px 3px 8px;border-radius:999px;white-space:nowrap;line-height:1.5}
+.badge::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.b-ok{color:var(--success);background:var(--success-soft)}
+.b-ok::before{background:var(--success-dot)}
+.b-test{color:var(--warn);background:var(--warn-soft)}
+.b-test::before{background:var(--warn-dot)}
+.b-work{color:var(--work);background:var(--work-soft)}
+
+/* 1 · Heute starten */
+.hero .wrap{padding-top:36px}
+.start-grid{display:grid;gap:16px;grid-template-columns:1fr}
+@media (min-width:720px){.start-grid{grid-template-columns:1fr 1fr}}
+.start-grid .card{display:grid;gap:14px;align-content:start}
+.card-label{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.card-label .n{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--violet-soft);color:var(--violet);font-size:13px;letter-spacing:0}
+.profile-card{grid-column:1/-1}
+@media (min-width:720px){.profile-card{grid-template-columns:auto 1fr;align-items:center;column-gap:28px}.profile-card .card-label{grid-row:1}.profile-card p{grid-column:1}.profile-card .seg{grid-row:1 / span 2;grid-column:2}}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;background:var(--surface-2);border-radius:12px;border:0;margin:0;min-width:0}
+.seg label{position:relative;display:block;cursor:pointer}
+.seg input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.seg span{display:flex;flex-direction:column;justify-content:center;min-height:58px;padding:8px 14px;border-radius:9px;transition:background .15s,box-shadow .15s}
+.seg strong{font-size:16px;font-weight:600;color:var(--text-2)}
+.seg small{font-size:13px;color:var(--text-2)}
+.seg input:checked + span{background:var(--surface);box-shadow:0 0 0 2px var(--violet)}
+.seg input:checked + span strong{color:var(--brand)}
+.seg input:focus-visible + span{outline:3px solid var(--violet);outline-offset:2px}
+.lead-facts{display:grid;gap:6px;margin:0;padding:0;list-style:none;font-size:15.5px}
+.lead-facts li{display:flex;gap:10px;align-items:baseline}
+.lead-facts li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--accent);transform:translateY(-2px)}
+
+.kick{display:grid;gap:12px}
+.kick-out{display:grid;gap:10px}
+.rule{background:var(--violet-soft);border-radius:var(--r);padding:18px 20px;display:grid;gap:12px}
+.rule strong{color:var(--brand)}
+.formula{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:15px}
+.formula .chip{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:4px 10px}
+.formula .chip b{color:var(--violet);font-weight:600}
+.formula .plus{color:var(--text-2)}
+details.more > summary{cursor:pointer;font-weight:600;color:var(--violet);list-style:none;display:inline-flex;align-items:center;gap:6px;min-height:44px}
+details.more > summary::-webkit-details-marker{display:none}
+details.more > summary::after{content:"";width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+details.more[open] > summary::after{transform:rotate(-135deg) translateY(-2px)}
+.habits{margin:4px 0 0;padding:0;list-style:none;display:grid;gap:8px;font-size:15.5px}
+.habits li{display:grid;grid-template-columns:minmax(0,190px) 1fr;gap:4px 14px}
+.habits li b{color:var(--brand);font-weight:600}
+@media (max-width:560px){.habits li{grid-template-columns:1fr}}
+
+/* 2 · Speisekarte */
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px;color:var(--text-2);align-items:center}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.quote{font-size:17px;color:var(--text-2);border-left:2px solid var(--border);padding-left:14px;max-width:60ch}
+.quote cite{font-style:normal;font-size:14px;display:block;margin-top:2px}
+.tiles{display:grid;gap:12px;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:720px){.tiles{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.tile{appearance:none;text-align:left;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:8px;cursor:pointer;min-height:150px;transition:border-color .15s,transform .15s;-webkit-tap-highlight-color:transparent}
+.tile:hover{border-color:var(--violet)}
+.tile:active{transform:scale(.985)}
+.tile[aria-pressed="true"]{border:2px solid transparent;padding:15px;background:linear-gradient(var(--surface),var(--surface)) padding-box,var(--spectrum) border-box}
+.tile svg{width:28px;height:28px;color:var(--accent)}
+.tile .t{font-weight:600;font-size:16px;color:var(--brand);line-height:1.3}
+.tile .w{font-size:14px;color:var(--text-2);line-height:1.4;flex:1}
+.tile .badge{align-self:flex-start}
+.detail{display:grid;gap:14px;scroll-margin-top:calc(var(--nav-h) + 16px)}
+.detail-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.detail-head svg{width:30px;height:30px;color:var(--accent)}
+.detail-head h3{flex:1;min-width:0}
+.detail .prompts{display:grid;gap:10px}
+@media (min-width:860px){.detail .prompts{grid-template-columns:1fr 1fr}}
+
+/* 3 · Leadmaschine */
+.progress{display:flex;align-items:center;gap:14px;font-size:15px;color:var(--text-2)}
+.bar{flex:1;height:8px;background:var(--surface-2);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--spectrum);border-radius:99px;transition:width .3s}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.step{display:grid;grid-template-columns:56px minmax(0,1fr);background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.chk{display:flex;justify-content:center;padding-top:18px;border-right:1px solid var(--border);cursor:pointer;position:relative}
+.chk input{position:absolute;opacity:0;width:44px;height:44px;top:8px;margin:0;cursor:pointer}
+.chk .box{width:26px;height:26px;border-radius:8px;border:2px solid var(--border);display:grid;place-items:center;transition:background .15s,border-color .15s}
+.chk .box svg{width:16px;height:16px;color:#fff;opacity:0}
+.chk input:checked + .box{background:var(--success-dot);border-color:var(--success-dot)}
+.chk input:checked + .box svg{opacity:1}
+.chk input:focus-visible + .box{outline:3px solid var(--violet);outline-offset:2px}
+.step details > summary{list-style:none;display:flex;align-items:center;gap:12px;min-height:62px;padding:10px 16px;cursor:pointer}
+.step details > summary::-webkit-details-marker{display:none}
+.step .num{font-size:14px;font-weight:600;color:var(--violet);font-variant-numeric:tabular-nums;width:1.2em}
+.step .st{font-weight:600;color:var(--brand);flex:1;min-width:0}
+.step .time{font-size:13.5px;color:var(--text-2);white-space:nowrap}
+.step .chev{width:18px;height:18px;color:var(--text-2);transition:transform .2s;flex:none}
+.step details[open] .chev{transform:rotate(180deg)}
+.step.done .st{color:var(--text-2)}
+.step-body{padding:0 16px 18px 16px;display:grid;gap:12px}
+@media (min-width:560px){.step-body{padding-left:48px}}
+@media (max-width:480px){.step .time{display:none}}
+.ways{display:grid;gap:10px}
+.way{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:start;padding:12px 14px;border:1px solid var(--border);border-radius:10px}
+.way .k{display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:var(--violet-soft);color:var(--violet);font-weight:700;grid-row:span 2}
+.way .h{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-weight:600;color:var(--brand)}
+.way p{font-size:15px;color:var(--text-2)}
+.note{font-size:14px;color:var(--text-2)}
+
+/* 4 · Baukasten */
+.builder{display:grid;gap:20px;align-items:start}
+@media (min-width:960px){.builder{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.builder .out{position:sticky;top:calc(var(--nav-h) + 20px)}}
+.fields{display:grid;gap:14px}
+@media (min-width:560px){.fields{grid-template-columns:1fr 1fr}.fields .full{grid-column:1/-1}}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:14px;font-weight:600;color:var(--brand)}
+.field input,.field select{width:100%;min-height:48px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--surface);font-size:16px;color:var(--text)}
+.field input:focus,.field select:focus{outline:none;border-color:var(--violet);box-shadow:0 0 0 3px var(--violet-soft)}
+.out{display:grid;gap:12px}
+@media (max-width:959px){.out{order:-1}}
+.out-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+
+/* 5 · Hilfe */
+.help-grid{display:grid;gap:16px}
+@media (min-width:760px){.help-grid{grid-template-columns:1fr 1fr}.help-grid .wide{grid-column:1/-1}}
+.help-grid .card{display:grid;gap:14px;align-content:start}
+.rhythm{display:grid;margin:0}
+.rhythm > div{display:grid;grid-template-columns:170px 1fr auto;gap:4px 16px;padding:12px 0;border-top:1px solid var(--border);align-items:baseline}
+.rhythm > div:first-child{border-top:0;padding-top:0}
+.rhythm dt{font-weight:600;color:var(--brand)}
+.rhythm dd{margin:0}
+.rhythm .min{color:var(--text-2);font-size:14.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
+@media (max-width:600px){.rhythm > div{grid-template-columns:1fr auto}.rhythm dd.task{grid-column:1/-1;grid-row:2}}
+.big{font-size:22px;font-weight:600;color:var(--brand);letter-spacing:-.3px;line-height:1.3}
+.people{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.people li{display:flex;align-items:center;gap:14px}
+.avatar{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--violet-soft);color:var(--violet);font-weight:600;font-size:15px}
+.people b{display:block;color:var(--brand);font-weight:600}
+.people span{font-size:14.5px;color:var(--text-2)}
+
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between;padding-block:28px 40px;border-top:1px solid var(--border);font-size:14px;color:var(--text-2)}
+footer .logo{height:24px}
+</style>
+</head>
+<body>
+
+<header class="brandbar">
+  <div class="spectrum"></div>
+  <div class="wrap">
+    <a href="#start" aria-label="Zenbai – zum Anfang">
+      <img class="logo logo-light" src="img/zenbai-logo.png" alt="Zenbai" width="480" height="133">
+      <img class="logo logo-dark" src="img/zenbai-logo-light.png" alt="Zenbai" width="480" height="133">
+      <span class="divider" aria-hidden="true"></span>
+      <span>Jarvis-Anleitung</span>
+    </a>
+    <span class="for">für Frank &amp; Daniel</span>
+  </div>
+</header>
+
+<nav class="main" aria-label="Bereiche">
+  <ul>
+    <li><a href="#start"><span class="long">Heute starten</span><span class="short">Heute</span></a></li>
+    <li><a href="#karte"><span class="long">Was Jarvis kann</span><span class="short">Karte</span></a></li>
+    <li><a href="#leads"><span class="long">Leadmaschine</span><span class="short">Leads</span></a></li>
+    <li><a href="#baukasten"><span class="long">Prompt-Baukasten</span><span class="short">Prompt</span></a></li>
+    <li><a href="#hilfe">Hilfe</a></li>
+  </ul>
+</nav>
+
+<main>
+<!-- 1 · Heute starten -->
+<section id="start" class="hero">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Heute starten</span>
+      <h1>Was sagst du Jarvis heute?</h1>
+      <p class="lead">Diese Seite ist deine Speisekarte. Such dir etwas aus, tipp auf „Kopieren“ und gib den Satz Jarvis.</p>
+    </div>
+
+    <div class="start-grid">
+      <div class="card profile-card">
+        <span class="card-label"><span class="n">1</span>Profil wählen</span>
+        <p class="muted small">Alle Prompts auf dieser Seite passen sich an.</p>
+        <fieldset class="seg" aria-label="Profil">
+          <label><input type="radio" name="profile" id="p-fc" value="fc" checked><span><strong>First Choice</strong><small>Frank · Kapitalanlage</small></span></label>
+          <label><input type="radio" name="profile" id="p-fp" value="fp"><span><strong>Finanzpapa</strong><small>Daniel · Unternehmer</small></span></label>
+        </fieldset>
+      </div>
+
+      <div class="card">
+        <span class="card-label"><span class="n">2</span>Die goldene Frage</span>
+        <p class="small muted">Vor jeder größeren Aufgabe. Jarvis fragt dann erst nach, statt zu raten.</p>
+        <div class="prompt">Ich habe folgendes Ziel: [dein Ziel]. Was brauchst du von mir, damit das Ergebnis richtig gut wird? Stell mir zuerst alle wichtigen Fragen.</div>
+      </div>
+
+      <div class="card">
+        <span class="card-label"><span class="n">3</span>Leadliste heute Nacht anstoßen</span>
+        <p class="small muted">Abends abschicken, morgens liegt die Excel-Liste da.</p>
+        <ul class="lead-facts" id="lead-facts"></ul>
+        <div class="btn-row">
+          <button class="btn btn-primary" type="button" data-copy="lead"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg><span>Prompt kopieren</span></button>
+          <a class="btn btn-ghost" href="#baukasten">Anpassen</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="kick">
+      <div class="btn-row">
+        <button class="btn btn-ghost" type="button" id="kick-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1.2" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg><span>Ich weiß nicht, was ich fragen soll</span></button>
+      </div>
+      <div class="kick-out" id="kick-out" aria-live="polite" hidden></div>
+    </div>
+
+    <div class="rule">
+      <p><strong>Grundregel: Erst Bedarf, dann Befehl.</strong> Sag Jarvis, was rauskommen soll, für wen und was nicht. Danach immer die goldene Frage.</p>
+      <div class="formula" aria-label="Formel">
+        <span class="chip"><b>Instruktion</b> was soll rauskommen</span><span class="plus">+</span>
+        <span class="chip"><b>Kontext</b> wer, wen, warum</span><span class="plus">+</span>
+        <span class="chip"><b>Constraints</b> was nicht</span>
+      </div>
+      <details class="more">
+        <summary>Fünf Gewohnheiten</summary>
+        <ul class="habits">
+          <li><b>Rede mit ihm</b><span>Sprachmodus statt tippen. Erzähl einfach.</span></li>
+          <li><b>Füttere ihn</b><span>Alle Dokumente rein. Je mehr er weiß, desto besser.</span></li>
+          <li><b>Denke in Akten</b><span>Eine Akte pro Kunde oder Projekt.</span></li>
+          <li><b>Lass ihn sich prüfen</b><span>„Prüf, ob du wirklich durchgekommen bist.“</span></li>
+          <li><b>Melde, was hakt</b><span>Screenshot + ein Satz in die WhatsApp-Gruppe.</span></li>
+        </ul>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- 2 · Was Jarvis kann -->
+<section id="karte">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Was Jarvis kann</span>
+      <h2>Die Speisekarte</h2>
+      <p class="quote">„Wenn ich nicht weiß, dass es ein Kirschdessert gibt, kann ich nicht danach fragen.“<cite>Frank</cite></p>
+    </div>
+    <div class="legend" aria-label="Status-Legende">
+      <span><span class="badge b-ok">läuft</span> heute nutzbar</span>
+      <span><span class="badge b-test">testen</span> funktioniert, braucht Feedback</span>
+      <span><span class="badge b-work">in Arbeit</span> wird gebaut</span>
+    </div>
+    <div class="tiles" id="tiles"></div>
+    <div class="card detail" id="detail" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- 3 · Leadmaschine -->
+<section id="leads">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Leadmaschine</span>
+      <h2>Neue Kunden in 7 Schritten</h2>
+      <p class="muted">Einmal einrichten, dann jede Woche gleich. Hak ab, was du erledigt hast.</p>
+    </div>
+    <div class="progress"><span class="bar" aria-hidden="true"><i id="bar"></i></span><span id="progress-text">0 von 8 erledigt</span></div>
+
+    <ol class="steps" id="steps">
+      <li class="step" data-step="0">
+        <label class="chk"><input type="checkbox" id="s0"><span class="box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="sr-only">Schritt 0 erledigt</span></label>
+        <details>
+          <summary><span class="num">0</span><span class="st">Einrichten</span><span class="time">einmalig · 30 min</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <div class="step-body">
+            <p>Profil wählen, Instagram-Token verbinden, Akten anlegen und alle Unterlagen hochladen. Danach lass dich von Jarvis interviewen:</p>
+            <div class="prompt">Interview mich 10 Minuten zu meinem Geschäft und leg danach mein Profil und meine Ziele in der Akte ab.</div>
+          </div>
+        </details>
+      </li>
+      <li class="step" data-step="1">
+        <label class="chk"><input type="checkbox" id="s1"><span class="box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="sr-only">Schritt 1 erledigt</span></label>
+        <details>
+          <summary><span class="num">1</span><span class="st">Persona schärfen</span><span class="time">20 min</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <div class="step-body">
+            <p>Wer ist dein idealer Kunde? Jarvis liest deine Website und Akte und sagt dir ehrlich, was fehlt.</p>
+            <div class="prompt">Lies {web} und alle Dokumente in meiner Akte. Beschreib meine 2 idealen Kundentypen: Alter, Lebenssituation, Beruf, Einkommen, größte Sorge, wo sie sich online aufhalten. Prüf, ob meine Website genau diese Menschen anspricht, und sag ehrlich, was fehlt. Stell mir zuerst Fragen.</div>
+          </div>
+        </details>
+      </li>
+      <li class="step" data-step="2">
+        <label class="chk"><input type="checkbox" id="s2"><span class="box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="sr-only">Schritt 2 erledigt</span></label>
+        <details>
+          <summary><span class="num">2</span><span class="st">Rechtssicheren Weg wählen</span><span class="time">einmalig</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <div class="step-body">
+            <div class="ways">
+              <div class="way"><span class="k">A</span><span class="h">Inbound <span class="badge b-ok">voll erlaubt</span></span><p>Content, Ratgeber und Rechner holen Privatkunden auf deine Website.</p></div>
+              <div class="way"><span class="k">B</span><span class="h">Unternehmer &amp; Selbstständige <span class="badge b-test">mit Augenmaß</span></span><p>Firmenkontakte, Anruf mit Geschäftsbezug. Mails nur mit Einwilligung.</p></div>
+              <div class="way"><span class="k">C</span><span class="h">Multiplikatoren <span class="badge b-ok">voll erlaubt</span></span><p>Steuerberater, Hausverwaltungen, Arbeitgeber, Verbände, Vereine: Vorträge und Promotions.</p></div>
+            </div>
+            <details class="more">
+              <summary>Beispiel Beamte</summary>
+              <p class="muted small">Nicht über Telefonlisten. Besser: Content zu Beihilfe und Pension plus Vorträge bei Arbeitgebern und Verbänden.</p>
+            </details>
+            <p class="note">Keine Rechtsberatung. Vor dem Start mit Compliance abstimmen.</p>
+          </div>
+        </details>
+      </li>
+      <li class="step" data-step="3">
+        <label class="chk"><input type="checkbox" id="s3"><span class="box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="sr-only">Schritt 3 erledigt</span></label>
+        <details>
+          <summary><span class="num">3</span><span class="st">Leadliste über Nacht</span><span class="time">abends · 5 min</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <div class="step-body">
+            <p>Abends anstoßen, morgens liegt die Liste da. Den fertigen Prompt baust du im Baukasten in einer Minute.</p>
+            <div class="btn-row">
+              <a class="btn btn-primary" href="#baukasten">Zum Prompt-Baukasten</a>
+              <button class="btn btn-ghost" type="button" data-copy="lead"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg><span>Direkt kopieren</span></button>
+            </div>
+          </div>
+        </details>
+      </li>
+      <li class="step" data-step="4">
+        <label class="chk"><input type="checkbox" id="s4"><span class="box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="sr-only">Schritt 4 erledigt</span></label>
+        <details>
+          <summary><span class="num">4</span><span class="st">Qualität prüfen</span><span class="time">morgens · 10 min</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <div class="step-body">
+            <p>10 Kontakte anklicken. Dann:</p>
+            <div class="prompt">Verifizier jeden Kontakt. Markier alles, was du nicht sicher belegen kannst.</div>
+            <p>Gib Feedback, damit die nächste Liste besser wird:</p>
+            <div class="prompt">Nr. [4, 9, 17] passen nicht, weil [Grund]. Lern daraus und mach die nächsten 50.</div>
+          </div>
+        </details>
+      </li>
+      <li class="step" data-step="5">
+        <label class="chk"><input type="checkbox" id="s5"><span class="box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="sr-only">Schritt 5 erledigt</span></label>
+        <details>
+          <summary><span class="num">5</span><span class="st">Ansprechen</span><span class="time">täglich · 30–60 min</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <div class="step-body">
+            <p>Auf LinkedIn vernetzen mit Notiz, nach 2–3 Tagen eine Mehrwert-Nachricht. Telefon mit Leitfaden. Dann Follow-up.</p>
+            <div class="prompt">Hier sind meine 10 besten Kontakte von heute. Schreib für jeden eine persönliche LinkedIn-Notiz (max. 300 Zeichen) und einen Telefon-Einstieg, der sich auf sein Unternehmen bezieht.</div>
+          </div>
+        </details>
+      </li>
+      <li class="step" data-step="6">
+        <label class="chk"><input type="checkbox" id="s6"><span class="box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="sr-only">Schritt 6 erledigt</span></label>
+        <details>
+          <summary><span class="num">6</span><span class="st">Content-Motor</span><span class="time">1× pro Woche</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <div class="step-body">
+            <p>Ein Prompt, eine Woche Content. Du gibst nur noch frei.</p>
+            <div class="prompt">Erstell den Wochenplan für {insta}, LinkedIn und TikTok: 3 Posts, 2 Reels, 1 Karussell. Jeder Beitrag endet mit einem Link zu [Rechner / Bewertung / Termin]. Zeig mir alles zur Freigabe, dann plane es ein.</div>
+          </div>
+        </details>
+      </li>
+      <li class="step" data-step="7">
+        <label class="chk"><input type="checkbox" id="s7"><span class="box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span class="sr-only">Schritt 7 erledigt</span></label>
+        <details>
+          <summary><span class="num">7</span><span class="st">Messen</span><span class="time">Freitag · 15 min</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <div class="step-body">
+            <div class="prompt">Wochenbericht: Wie viele Kontakte, Gespräche, Termine und Website-Anfragen? Welcher Kanal und Post hat am besten funktioniert? Was ändern wir nächste Woche?</div>
+          </div>
+        </details>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- 4 · Prompt-Baukasten -->
+<section id="baukasten">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Prompt-Baukasten</span>
+      <h2>Deine Leadliste, fertig formuliert</h2>
+      <p class="muted">Felder anpassen, der Prompt passt sich live an. Kopieren, an Jarvis schicken, schlafen gehen.</p>
+    </div>
+    <div class="builder">
+      <form class="card fields" id="builder" autocomplete="off">
+        <div class="field full">
+          <label for="f-profil">Profil</label>
+          <select id="f-profil">
+            <option value="fc">First Choice · Kapitalanlage (Frank)</option>
+            <option value="fp">Finanzpapa · Unternehmer (Daniel)</option>
+          </select>
+        </div>
+        <div class="field full"><label for="f-zielgruppe">Zielgruppe</label><input id="f-zielgruppe" type="text"></div>
+        <div class="field"><label for="f-region">Region</label><input id="f-region" type="text"></div>
+        <div class="field"><label for="f-alter">Alter</label><input id="f-alter" type="text"></div>
+        <div class="field full"><label for="f-situation">Situation</label><input id="f-situation" type="text"></div>
+        <div class="field full"><label for="f-angebot">Angebot</label><input id="f-angebot" type="text"></div>
+        <div class="field"><label for="f-website">Website</label><input id="f-website" type="text" inputmode="url"></div>
+        <div class="field"><label for="f-anzahl">Anzahl Kontakte</label><input id="f-anzahl" type="number" min="5" max="500" step="5" inputmode="numeric"></div>
+        <div class="field full"><label for="f-ausschluss">Ausschlüsse</label><input id="f-ausschluss" type="text"></div>
+        <div class="full"><button class="btn btn-ghost" type="button" id="reset">Zurücksetzen</button></div>
+      </form>
+      <div class="out">
+        <div class="out-head"><h3>Dein fertiger Prompt</h3><span class="badge b-test">testen</span></div>
+        <div class="prompt" id="out"></div>
+        <p class="note">Jarvis fragt zurück? Gut so. Beantworte seine Fragen, dann wird die Liste besser.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · Hilfe -->
+<section id="hilfe">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Hilfe</span>
+      <h2>Rhythmus und Rückendeckung</h2>
+    </div>
+    <div class="help-grid">
+      <div class="card wide">
+        <h3>Dein Wochenrhythmus</h3>
+        <dl class="rhythm">
+          <div><dt>Montag</dt><dd class="task">Content freigeben, Leadliste anstoßen</dd><dd class="min">20 min</dd></div>
+          <div><dt>Täglich</dt><dd class="task">Briefing lesen, 10 Kontakte ansprechen, Follow-ups</dd><dd class="min">30–60 min</dd></div>
+          <div><dt>Nach jedem Termin</dt><dd class="task">Sprachnachricht an Jarvis</dd><dd class="min">5 min</dd></div>
+          <div><dt>Freitag</dt><dd class="task">Wochenbericht und Feedback</dd><dd class="min">15 min</dd></div>
+        </dl>
+      </div>
+      <div class="card">
+        <h3>Wenn es hakt</h3>
+        <p class="big">Screenshot + ein Satz in die WhatsApp-Gruppe.</p>
+        <p class="muted small">Mehr brauchen wir nicht. Jede Meldung macht Jarvis besser. Vorher kurz Jarvis selbst fragen:</p>
+        <div class="prompt">Prüf, ob die letzten 3 Aufgaben wirklich erledigt sind oder ob du nur angenommen hast, dass sie geklappt haben.</div>
+      </div>
+      <div class="card">
+        <h3>Deine Ansprechpartner</h3>
+        <ul class="people">
+          <li><span class="avatar" aria-hidden="true">FR</span><div><b>Felix Rohde</b><span>Kundenbetreuung, erste Anlaufstelle</span></div></li>
+          <li><span class="avatar" aria-hidden="true">S</span><div><b>Sattar</b><span>Jarvis-Technik</span></div></li>
+          <li><span class="avatar" aria-hidden="true">SS</span><div><b>Sebastian Singh</b><span>Plattform</span></div></li>
+        </ul>
+        <p class="muted small">Alle drei sind in der WhatsApp-Gruppe.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img class="logo logo-light" src="img/zenbai-logo.png" alt="Zenbai" width="480" height="133" loading="lazy">
+    <img class="logo logo-dark" src="img/zenbai-logo-light.png" alt="Zenbai" width="480" height="133" loading="lazy">
+    <span>Jarvis-Anleitung · Stand Oktober 2026</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- Speicher (optional) ---------- */
+  var store = {
+    get: function(k, d){ try{ var v = localStorage.getItem("jarvis." + k); return v === null ? d : JSON.parse(v); }catch(e){ return d; } },
+    set: function(k, v){ try{ localStorage.setItem("jarvis." + k, JSON.stringify(v)); }catch(e){} }
+  };
+
+  /* ---------- Daten ---------- */
+  var PROFILES = {
+    fc: { label: "First Choice · Kapitalanlage", web: "first-choice-immo.de", insta: "@immobilien.klartext" },
+    fp: { label: "Finanzpapa · Unternehmer", web: "finanzpapa24.de", insta: "@der.finanz.papa" }
+  };
+  var DEFAULTS = {
+    zielgruppe: "Selbstständige, Ärzte, Handwerksmeister, Inhaber kleiner Firmen",
+    region: "Bamberg, Oberfranken, 50 km",
+    alter: "45–60",
+    situation: "Familie, gutes Einkommen, wenig Zeit für Finanzen",
+    angebot: "ganzheitliche Finanz- und Immobilienberatung",
+    ausschluss: "Makler, Banken, Finanzberater, Sekretariate",
+    anzahl: "50"
+  };
+  var STATUS = { ok: ["b-ok", "läuft"], test: ["b-test", "testen"], work: ["b-work", "in Arbeit"] };
+
+  var ICONS = {
+    search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
+    chat: '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8"/>',
+    social: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/>',
+    globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/>',
+    doc: '<path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h7M9 16h7"/>',
+    folder: '<path d="M3 6h6l2 2h10v11H3z"/>',
+    board: '<rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="5" rx="1.5"/><rect x="13" y="10" width="8" height="11" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/>',
+    mic: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/>'
+  };
+  function icon(n){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONS[n] + '</svg>'; }
+
+  var TILES = [
+    { t: "Leads & Recherche", s: "test", i: "search", w: "Persona, Firmen, Entscheider, Excel-Liste", p: [
+      "Hier ist meine Persona. Was brauchst du noch, um mir 50 passende Kontakte als Excel zu bauen?",
+      "Welche Steuerberater und Hausverwaltungen im Umkreis wären gute Kooperationspartner? Mit Begründung und Ansprechtext." ] },
+    { t: "Ansprache", s: "ok", i: "chat", w: "LinkedIn, Anrufleitfaden, Follow-ups, Einwände", p: [
+      "Schreib mir einen Anrufleitfaden für [Kontakt X]: Einstieg, 3 Bedarfsfragen, Terminfrage.",
+      "Hier sind meine 10 besten Kontakte von heute. Schreib für jeden eine persönliche LinkedIn-Notiz (max. 300 Zeichen) und einen Telefon-Einstieg, der sich auf sein Unternehmen bezieht." ] },
+    { t: "Social Media", s: "ok", i: "social", w: "Wochenplan, Posts, Reels, Posten über Meta und LinkedIn", p: [
+      "Plan mir 2 Wochen Content für Instagram, LinkedIn und TikTok. Jeder Post verlinkt auf meine Website {web}.",
+      "Mach aus meinem letzten LinkedIn-Post ein Reel-Skript mit Hook in den ersten 2 Sekunden." ] },
+    { t: "Website & SEO", s: "ok", i: "globe", w: "Seiten, Formulare, Terminbuchung, Tracking, SEO", p: [
+      "Mach einen SEO- und Conversion-Check meiner Website {web} und setz die 5 wichtigsten Punkte um.",
+      "Welche 5 Fragen stellen meine Kunden am häufigsten? Mach daraus je einen Post und eine FAQ auf der Website." ] },
+    { t: "Angebote & Dokumente", s: "ok", i: "doc", w: "Angebote, PDFs, Präsentationen, Berechnungen", p: [
+      "Mach aus dieser Sprachnachricht vom Termin ein Angebot als PDF im Design meiner Website.",
+      "Schreib mir einen Vortrag „Finanzen für Selbstständige in 30 Minuten“ für Unternehmerstammtische, inklusive Einladungstext." ] },
+    { t: "Wissen & Akten", s: "ok", i: "folder", w: "Eine Akte pro Kunde oder Projekt, alles hochladen", p: [
+      "Leg eine Akte für [Kunde Müller] an. Hier sind alle Unterlagen. Was fehlt dir noch?",
+      "Hier ist mein Termin-Transkript. Fass den Bedarf zusammen, schreib die Follow-up-Mail und leg alles in die Kundenakte." ] },
+    { t: "Überblick & Planung", s: "test", i: "board", w: "Dashboard, Tagesbriefing, Leinwand", p: [
+      "Gib mir jeden Morgen ein Briefing: wen anrufen, was posten, was ist offen.",
+      "Wochenbericht: Wie viele Kontakte, Gespräche, Termine und Website-Anfragen? Welcher Kanal und Post hat am besten funktioniert? Was ändern wir nächste Woche?" ] },
+    { t: "Gesprächs-Coaching", s: "work", i: "mic", w: "Vorbereitung, Transkript-Auswertung", p: [
+      "Hier ist das Transkript meines Termins. Was lief gut, was mache ich nächstes Mal besser?",
+      "Bereite mich auf den Termin morgen mit [Herrn X] vor: Was weiß ich, welche Fragen stelle ich, welche Einwände kommen?" ] }
+  ];
+
+  var KICK = [
+    "Was kannst du alles für mich tun? Zeig mir die 10 Dinge, die mir als Finanz- und Immobilienberater am meisten Zeit sparen.",
+    "Interview mich 10 Minuten zu meinem Geschäft und leg danach mein Profil und meine Ziele in der Akte ab.",
+    "Welche 5 Fragen stellen meine Kunden am häufigsten? Mach daraus je einen Post und eine FAQ auf der Website.",
+    "Schau dir die Websites von 3 starken Wettbewerbern in Bamberg an. Was machen die besser als ich?",
+    "Schreib mir einen Vortrag „Finanzen für Selbstständige in 30 Minuten“ für Unternehmerstammtische, inklusive Einladungstext.",
+    "Welche Steuerberater und Hausverwaltungen im Umkreis wären gute Kooperationspartner? Mit Begründung und Ansprechtext.",
+    "Hier ist mein Termin-Transkript. Fass den Bedarf zusammen, schreib die Follow-up-Mail und leg alles in die Kundenakte.",
+    "Bereite mich auf den Termin morgen mit [Herrn X] vor: Was weiß ich, welche Fragen stelle ich, welche Einwände kommen?",
+    "Mach aus meinem letzten LinkedIn-Post ein Reel-Skript mit Hook in den ersten 2 Sekunden.",
+    "Plane eine Promotion-Aktion im Einkaufscenter: Ablauf, Flyer, Gewinnspiel mit Einwilligung, Follow-up.",
+    "Prüf, ob die letzten 3 Aufgaben wirklich erledigt sind oder ob du nur angenommen hast, dass sie geklappt haben.",
+    "Was soll ich dich als Nächstes fragen? Was nutzen erfolgreiche Berater mit Jarvis, das ich noch nicht nutze?"
+  ];
+
+  /* ---------- Hilfsfunktionen ---------- */
+  var $ = function(s, r){ return (r || document).querySelector(s); };
+  var $$ = function(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function mark(s){ return esc(s).replace(/\[([^\]]+)\]/g, '<span class="ph">[$1]</span>'); }
+  var COPY_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>';
+  var COPY_BTN = '<button class="copy" type="button" data-copy="box">' + COPY_ICON + '<span>Kopieren</span></button>';
+
+  var state = { profile: store.get("profile", "fc") };
+  if (!PROFILES[state.profile]) state.profile = "fc";
+
+  function fill(tpl){
+    var p = PROFILES[state.profile];
+    return tpl.replace(/\{web\}/g, p.web).replace(/\{insta\}/g, p.insta);
+  }
+
+  /* Prompt-Boxen: Text im HTML ist die Vorlage */
+  function renderPrompt(el){
+    if (!el.dataset.tpl) el.dataset.tpl = el.textContent.trim();
+    var text = fill(el.dataset.tpl);
+    el.dataset.text = text;
+    el.innerHTML = "<p>" + mark(text) + "</p>" + COPY_BTN;
+  }
+  function refreshPrompts(){ $$(".prompt[data-tpl], .prompt:not(#out)").forEach(renderPrompt); }
+
+  /* ---------- Kopieren ---------- */
+  function legacyCopy(text){
+    var ta = document.createElement("textarea");
+    ta.value = text; ta.setAttribute("readonly", "");
+    ta.style.position = "fixed"; ta.style.top = "0"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    var ok = false;
+    try{ ok = document.execCommand("copy"); }catch(e){}
+    document.body.removeChild(ta);
+    return ok;
+  }
+  function selectText(el){
+    try{ var r = document.createRange(); r.selectNodeContents(el); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); }catch(e){}
+  }
+  function feedback(btn, label, ok){
+    var span = btn.querySelector("span");
+    if (!btn.dataset.label) btn.dataset.label = span.textContent;
+    span.textContent = label;
+    btn.classList.toggle("ok", ok);
+    clearTimeout(btn._t);
+    btn._t = setTimeout(function(){ span.textContent = btn.dataset.label; btn.classList.remove("ok"); }, 1800);
+  }
+  function copy(text, btn, source){
+    var done = function(){ feedback(btn, "Kopiert ✓", true); };
+    var fail = function(){
+      if (legacyCopy(text)) return done();
+      if (source) selectText(source);
+      feedback(btn, "Markiert, jetzt kopieren", false);
+    };
+    try{
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fail);
+      else fail();
+    }catch(e){ fail(); }
+  }
+  document.addEventListener("click", function(e){
+    var btn = e.target.closest("[data-copy]");
+    if (!btn) return;
+    if (btn.dataset.copy === "lead") return copy(buildPrompt(), btn, $("#out"));
+    var box = btn.closest(".prompt");
+    copy(box.dataset.text, btn, box.querySelector("p, .lines"));
+  });
+
+  /* ---------- Profil ---------- */
+  function setProfile(p, opts){
+    if (!PROFILES[p]) return;
+    state.profile = p;
+    store.set("profile", p);
+    $$('input[name="profile"]').forEach(function(r){ r.checked = r.value === p; });
+    $("#f-profil").value = p;
+    if (!opts || !opts.keepWeb) $("#f-website").value = PROFILES[p].web;
+    refreshPrompts();
+    renderDetail();
+    build();
+  }
+  $$('input[name="profile"]').forEach(function(r){
+    r.addEventListener("change", function(){ setProfile(r.value); });
+  });
+
+  /* ---------- Speisekarte ---------- */
+  var tilesEl = $("#tiles"), detailEl = $("#detail"), current = 0;
+  tilesEl.innerHTML = TILES.map(function(t, i){
+    var st = STATUS[t.s];
+    return '<button class="tile" type="button" aria-pressed="false" aria-controls="detail" data-i="' + i + '">' + icon(t.i) +
+      '<span class="t">' + esc(t.t) + '</span><span class="w">' + esc(t.w) + '</span><span class="badge ' + st[0] + '">' + st[1] + '</span></button>';
+  }).join("");
+  function renderDetail(){
+    var t = TILES[current], st = STATUS[t.s];
+    $$(".tile", tilesEl).forEach(function(b, i){ b.setAttribute("aria-pressed", String(i === current)); });
+    detailEl.innerHTML = '<div class="detail-head">' + icon(t.i) + '<h3>' + esc(t.t) + '</h3><span class="badge ' + st[0] + '">' + st[1] + '</span></div>' +
+      '<p class="muted">' + esc(t.w) + '. Probier einen dieser Sätze:</p>' +
+      '<div class="prompts">' + t.p.map(function(p){ return '<div class="prompt">' + esc(p) + '</div>'; }).join("") + '</div>';
+    $$(".prompt", detailEl).forEach(renderPrompt);
+  }
+  tilesEl.addEventListener("click", function(e){
+    var b = e.target.closest(".tile");
+    if (!b) return;
+    current = +b.dataset.i;
+    renderDetail();
+    var r = detailEl.getBoundingClientRect();
+    if (r.top > window.innerHeight * 0.7 || r.top < 0){
+      var smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      detailEl.scrollIntoView({ block: "start", behavior: smooth ? "smooth" : "auto" });
+    }
+  });
+
+  /* ---------- Kickstarter ---------- */
+  var lastKick = -1, kickOut = $("#kick-out"), kickBtn = $("#kick-btn");
+  kickBtn.addEventListener("click", function(){
+    var i;
+    do { i = Math.floor(Math.random() * KICK.length); } while (i === lastKick && KICK.length > 1);
+    lastKick = i;
+    kickOut.innerHTML = '<div class="prompt">' + esc(KICK[i]) + '</div>';
+    renderPrompt($(".prompt", kickOut));
+    kickOut.hidden = false;
+    kickBtn.querySelector("span").textContent = "Noch eine Idee";
+  });
+
+  /* ---------- Leadmaschine ---------- */
+  var done = store.get("done", []);
+  if (!Array.isArray(done)) done = [];
+  var boxes = $$("#steps input[type=checkbox]");
+  function updateProgress(){
+    var n = 0;
+    boxes.forEach(function(cb){
+      var li = cb.closest(".step");
+      li.classList.toggle("done", cb.checked);
+      if (cb.checked) n++;
+    });
+    $("#bar").style.width = (n / boxes.length * 100) + "%";
+    $("#progress-text").textContent = n + " von " + boxes.length + " erledigt";
+  }
+  boxes.forEach(function(cb){
+    cb.checked = done.indexOf(cb.closest(".step").dataset.step) !== -1;
+    cb.addEventListener("change", function(){
+      var ids = boxes.filter(function(c){ return c.checked; }).map(function(c){ return c.closest(".step").dataset.step; });
+      store.set("done", ids);
+      updateProgress();
+      if (cb.checked){
+        var d = cb.closest(".step").querySelector("details");
+        d.open = false;
+        var next = boxes.filter(function(c){ return !c.checked; })[0];
+        if (next) next.closest(".step").querySelector("details").open = true;
+      }
+    });
+  });
+  updateProgress();
+  var firstOpen = boxes.filter(function(c){ return !c.checked; })[0];
+  if (firstOpen) firstOpen.closest(".step").querySelector("details").open = true;
+
+  /* ---------- Prompt-Baukasten ---------- */
+  var F = {};
+  ["profil", "zielgruppe", "region", "alter", "situation", "angebot", "website", "anzahl", "ausschluss"].forEach(function(k){ F[k] = $("#f-" + k); });
+  var savedForm = store.get("form", null);
+  function applyDefaults(){
+    Object.keys(DEFAULTS).forEach(function(k){ F[k].value = DEFAULTS[k]; });
+    F.website.value = PROFILES[state.profile].web;
+  }
+  applyDefaults();
+  if (savedForm && typeof savedForm === "object"){
+    Object.keys(DEFAULTS).concat("website").forEach(function(k){ if (typeof savedForm[k] === "string") F[k].value = savedForm[k]; });
+  }
+  F.profil.value = state.profile;
+
+  function v(k){ var x = F[k].value.trim(); return x || "[" + F[k].labels[0].textContent + "]"; }
+  function lines(){
+    var p = PROFILES[F.profil.value] || PROFILES.fc;
+    return [
+      ["Instruktion", "Erstell mir bis morgen früh eine Excel-Liste mit " + v("anzahl") + " Kontakten für " + p.label + "."],
+      ["Kontext", "Mein idealer Kunde ist " + v("zielgruppe") + " in " + v("region") + ", " + v("alter") + " Jahre, " + v("situation") + ". Ich biete " + v("angebot") + ". Meine Website: " + v("website") + "."],
+      ["Constraints", "Nur Entscheider (Inhaber, Geschäftsführer). Keine " + v("ausschluss") + ". Nur öffentlich verfügbare Geschäftsdaten."],
+      ["Spalten", "Name · Rolle · Firma · Branche · Ort · Telefon (geschäftlich) · E-Mail (geschäftlich) · Website · LinkedIn · Quelle · Warum passt der Kontakt · Score 1–10."],
+      ["Vorher", "Was brauchst du noch von mir, damit die Qualität steigt?"]
+    ];
+  }
+  function buildPrompt(){ return lines().map(function(l){ return l[0] + ": " + l[1]; }).join("\n"); }
+  function build(){
+    var out = $("#out"), ls = lines();
+    out.dataset.text = buildPrompt();
+    out.innerHTML = '<div class="lines">' + ls.map(function(l){ return "<p><b>" + l[0] + ":</b> " + mark(l[1]) + "</p>"; }).join("") + "</div>" + COPY_BTN;
+    $("#lead-facts").innerHTML =
+      "<li>" + esc(v("anzahl")) + " Entscheider als Excel-Liste</li>" +
+      "<li>" + esc(v("zielgruppe")) + "</li>" +
+      "<li>" + esc(v("region")) + ", " + esc(v("alter")) + " Jahre</li>";
+  }
+  function saveForm(){
+    var o = {};
+    Object.keys(DEFAULTS).concat("website").forEach(function(k){ o[k] = F[k].value; });
+    store.set("form", o);
+  }
+  $("#builder").addEventListener("input", function(e){
+    if (e.target === F.profil) return;
+    saveForm(); build();
+  });
+  F.profil.addEventListener("change", function(){ setProfile(F.profil.value); saveForm(); });
+  $("#builder").addEventListener("submit", function(e){ e.preventDefault(); });
+  $("#reset").addEventListener("click", function(){ applyDefaults(); saveForm(); build(); });
+
+  /* ---------- Navigation: aktiver Bereich ---------- */
+  var links = $$("nav.main a");
+  function setActive(id){ links.forEach(function(a){ a.setAttribute("aria-current", String(a.getAttribute("href") === "#" + id)); }); }
+  setActive("start");
+  if ("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if (en.isIntersecting) setActive(en.target.id); });
+    }, { rootMargin: "-35% 0px -60% 0px" });
+    $$("main section").forEach(function(s){ io.observe(s); });
+  }
+
+  /* ---------- Start ---------- */
+  $$('input[name="profile"]').forEach(function(r){ r.checked = r.value === state.profile; });
+  refreshPrompts();
+  renderDetail();
+  build();
+})();
+</script>
+</body>
+</html>
