@@ -4,16 +4,21 @@ Klickbare One-Page-Anleitung („Speisekarte“) zum Jarvis für Frank Weisgerbe
 
 ## Dateien
 - `page.html`: Quelle (Inhalt, Styles, Script)
-- `build.sh`: baut daraus `dist/`
-- `dist/`: fertige statische Seite (`index.html`, `img/`, `_headers` mit noindex)
+- `build.sh`: baut daraus `docs/`
+- `docs/`: fertige statische Seite (`index.html` mit Umschalter, `frank/`, `daniel/`, `img/`)
 
 ## Ändern und bauen
 ```sh
 sh build.sh
-python3 -m http.server 4321 -d dist
+python3 -m http.server 4321 -d docs
 ```
 
+## Links
+- Frank: https://felixrohdeezencia.github.io/jarvis-anleitung-frank-daniel/frank/
+- Daniel: https://felixrohdeezencia.github.io/jarvis-anleitung-frank-daniel/daniel/
+- Mit Umschalter: https://felixrohdeezencia.github.io/jarvis-anleitung-frank-daniel/
+
 ## Hosting
-Cloudflare Pages, Build-Ausgabe `dist`, kein Build-Befehl nötig (oder `sh build.sh`). Vorschlag: `jarvis.zenbai.de/frank-daniel`, optional hinter Cloudflare Access.
+GitHub Pages aus `main` › `/docs`. Alternativ Cloudflare Pages, Build-Ausgabe `docs`, kein Build-Befehl nötig (oder `sh build.sh`). Vorschlag: `jarvis.zenbai.de/frank-daniel`, optional hinter Cloudflare Access.
 
 Iframe-tauglich, keine festen Höhen, kein Tracking. Fortschritt und Formular liegen nur im localStorage des Geräts.

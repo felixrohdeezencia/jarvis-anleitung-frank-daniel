@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<link rel="icon" href="img/zenbai-logo.png">
+<link rel="icon" href="../img/zenbai-logo.png">
+<script>window.JARVIS_PROFILE="fc"</script>
 <title>Jarvis-Anleitung Frank &amp; Daniel</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="robots" content="noindex, nofollow">
@@ -269,8 +270,8 @@ footer .logo{height:24px}
   <div class="spectrum"></div>
   <div class="wrap">
     <a href="#start" aria-label="Zenbai – zum Anfang">
-      <img class="logo logo-light" src="img/zenbai-logo.png" alt="Zenbai" width="480" height="133">
-      <img class="logo logo-dark" src="img/zenbai-logo-light.png" alt="Zenbai" width="480" height="133">
+      <img class="logo logo-light" src="../img/zenbai-logo.png" alt="Zenbai" width="480" height="133">
+      <img class="logo logo-dark" src="../img/zenbai-logo-light.png" alt="Zenbai" width="480" height="133">
       <span class="divider" aria-hidden="true"></span>
       <span>Jarvis-Anleitung</span>
     </a>
@@ -553,8 +554,8 @@ footer .logo{height:24px}
 
 <footer>
   <div class="wrap">
-    <img class="logo logo-light" src="img/zenbai-logo.png" alt="Zenbai" width="480" height="133" loading="lazy">
-    <img class="logo logo-dark" src="img/zenbai-logo-light.png" alt="Zenbai" width="480" height="133" loading="lazy">
+    <img class="logo logo-light" src="../img/zenbai-logo.png" alt="Zenbai" width="480" height="133" loading="lazy">
+    <img class="logo logo-dark" src="../img/zenbai-logo-light.png" alt="Zenbai" width="480" height="133" loading="lazy">
     <span>Jarvis-Anleitung · Stand Oktober 2026</span>
   </div>
 </footer>
@@ -647,8 +648,11 @@ footer .logo{height:24px}
   var COPY_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>';
   var COPY_BTN = '<button class="copy" type="button" data-copy="box">' + COPY_ICON + '<span>Kopieren</span></button>';
 
-  var state = { profile: store.get("profile", "fc") };
+  /* Profil-Seiten (/frank/, /daniel/) setzen window.JARVIS_PROFILE und starten immer mit ihrem Profil */
+  var fixed = window.JARVIS_PROFILE;
+  var state = { profile: PROFILES[fixed] ? fixed : store.get("profile", "fc") };
   if (!PROFILES[state.profile]) state.profile = "fc";
+  if (PROFILES[fixed]) $(".for").textContent = fixed === "fc" ? "für Frank · First Choice" : "für Daniel · Finanzpapa";
 
   function fill(tpl){
     var p = PROFILES[state.profile];
@@ -805,6 +809,7 @@ footer .logo{height:24px}
   if (savedForm && typeof savedForm === "object"){
     Object.keys(DEFAULTS).concat("website").forEach(function(k){ if (typeof savedForm[k] === "string") F[k].value = savedForm[k]; });
   }
+  if (PROFILES[fixed]) F.website.value = PROFILES[fixed].web;
   F.profil.value = state.profile;
 
   function v(k){ var x = F[k].value.trim(); return x || "[" + F[k].labels[0].textContent + "]"; }

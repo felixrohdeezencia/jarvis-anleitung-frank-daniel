@@ -640,8 +640,11 @@ footer .logo{height:24px}
   var COPY_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>';
   var COPY_BTN = '<button class="copy" type="button" data-copy="box">' + COPY_ICON + '<span>Kopieren</span></button>';
 
-  var state = { profile: store.get("profile", "fc") };
+  /* Profil-Seiten (/frank/, /daniel/) setzen window.JARVIS_PROFILE und starten immer mit ihrem Profil */
+  var fixed = window.JARVIS_PROFILE;
+  var state = { profile: PROFILES[fixed] ? fixed : store.get("profile", "fc") };
   if (!PROFILES[state.profile]) state.profile = "fc";
+  if (PROFILES[fixed]) $(".for").textContent = fixed === "fc" ? "für Frank · First Choice" : "für Daniel · Finanzpapa";
 
   function fill(tpl){
     var p = PROFILES[state.profile];
@@ -798,6 +801,7 @@ footer .logo{height:24px}
   if (savedForm && typeof savedForm === "object"){
     Object.keys(DEFAULTS).concat("website").forEach(function(k){ if (typeof savedForm[k] === "string") F[k].value = savedForm[k]; });
   }
+  if (PROFILES[fixed]) F.website.value = PROFILES[fixed].web;
   F.profil.value = state.profile;
 
   function v(k){ var x = F[k].value.trim(); return x || "[" + F[k].labels[0].textContent + "]"; }
